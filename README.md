@@ -5,7 +5,7 @@ Home: https://github.com/libkml/libkml
 
 Package license: BSD 3-Clause
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Reference implementation of OGC KML 2.2
 
@@ -18,7 +18,21 @@ Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>Travis</td>
+    <td>
+      <a href="https://travis-ci.com/conda-forge/libkml-feedstock">
+        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/libkml-feedstock/master.svg?label=macOS">
+      </a>
+    </td>
+  </tr><tr>
+    <td>Drone</td>
+    <td>
+      <a href="https://cloud.drone.io/conda-forge/libkml-feedstock">
+        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/libkml-feedstock/master.svg?label=Linux">
+      </a>
+    </td>
+  </tr>
     
   <tr>
     <td>Azure</td>
@@ -32,36 +46,44 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=549&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=linux&configuration=linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx</td>
+              <td>linux_aarch64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=549&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_c_compilervs2015cxx_compilervs2015vc14</td>
+              <td>linux_ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=549&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=win&configuration=win_c_compilervs2015cxx_compilervs2015vc14" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=549&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=549&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libkml-feedstock?branchName=master&jobName=win&configuration=win_64_" alt="variant">
                 </a>
               </td>
             </tr>
           </tbody>
         </table>
       </details>
-    </td>
-  </tr>
-  <tr>
-    <td>Linux_ppc64le</td>
-    <td>
-      <img src="https://img.shields.io/badge/ppc64le-disabled-lightgrey.svg" alt="ppc64le disabled">
     </td>
   </tr>
 </table>
