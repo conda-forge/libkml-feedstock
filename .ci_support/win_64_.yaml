@@ -1,20 +1,18 @@
 boost_cpp:
-- 1.74.0
+- 1.78.0
 c_compiler:
-- vs2017
+- vs2019
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- vs2019
 expat:
-- '2.3'
+- '2'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  expat:
-    max_pin: x.x
   zlib:
     max_pin: x.x
 target_platform:
