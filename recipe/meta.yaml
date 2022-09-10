@@ -12,7 +12,7 @@ source:
     - empty_char.patch  # [win and vc==14]
 
 build:
-  number: 1014
+  number: 1015
   skip: True  # [vc<14 and win]
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
