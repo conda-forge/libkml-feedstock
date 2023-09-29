@@ -12,7 +12,7 @@ source:
     - empty_char.patch  # [win and vc==14]
 
 build:
-  number: 1015
+  number: 1016
   skip: True  # [vc<14 and win]
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
@@ -25,11 +25,10 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
   host:
-    - boost-cpp
+    - libboost-devel
     - expat
     - zlib
   run:
-    - boost-cpp
     - expat
     - zlib
 
