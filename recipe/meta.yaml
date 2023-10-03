@@ -13,7 +13,6 @@ source:
 
 build:
   number: 1016
-  skip: True  # [vc<14 and win]
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
@@ -25,9 +24,11 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
   host:
-    - libboost-devel
+    - libboost-headers
     - expat
     - uriparser
+    # not compatible with minizip in conda-forge, see GH-2
+    # - minizip 1.*
     - zlib
   run:
 
