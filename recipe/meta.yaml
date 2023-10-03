@@ -12,8 +12,7 @@ source:
     - empty_char.patch  # [win and vc==14]
 
 build:
-  number: 1015
-  skip: True  # [vc<14 and win]
+  number: 1016
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
@@ -25,13 +24,13 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
   host:
-    - boost-cpp
+    - libboost-headers
     - expat
+    - uriparser
+    # not compatible with minizip in conda-forge, see GH-2
+    # - minizip 1.*
     - zlib
   run:
-    - boost-cpp
-    - expat
-    - zlib
 
 test:
   commands:
