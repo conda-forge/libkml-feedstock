@@ -12,7 +12,7 @@ source:
     - empty_char.patch  # [win and vc==14]
 
 build:
-  number: 1016
+  number: 1017
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
@@ -31,6 +31,8 @@ requirements:
     # - minizip 1.*
     - zlib
   run:
+    # relied upon by libkml headers, so we need them
+    - libboost-headers
 
 test:
   commands:
