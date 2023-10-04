@@ -1,7 +1,7 @@
 From edb1b0f5c7d8eebe7901d2b0c4e6224b88aa324c Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Wed, 4 Oct 2023 19:47:27 +1100
-Subject: [PATCH 7/7] copy over a define necessary for libmkl's zip handling
+Subject: [PATCH 7/8] copy over a define necessary for libmkl's zip handling
 
 ---
  src/kml/base/zip_file.h | 13 +++++++++++++

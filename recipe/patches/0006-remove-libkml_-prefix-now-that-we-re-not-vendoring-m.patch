@@ -1,7 +1,7 @@
 From d58991455f6bd1be981f3aa3d66f20e5c74f173c Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Wed, 4 Oct 2023 18:26:26 +1100
-Subject: [PATCH 6/7] remove `libkml_` prefix now that we're not vendoring
+Subject: [PATCH 6/8] remove `libkml_` prefix now that we're not vendoring
  minizip anymore
 
 These functions all still exist in the mininzip API, see

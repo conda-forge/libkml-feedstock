@@ -1,0 +1,30 @@
+From 2a6bd08f457cae53187e6df0e702c9d8037e6756 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Thu, 5 Oct 2023 08:17:22 +1100
+Subject: [PATCH 8/8] remove expected failure for handling newer zips
+
+The description of the test[1] says:
+  // Some ZIP files created with new zip-creation tools can't be uncompressed
+  // by our underlying minizip library. Assert sane behavior.
+
+Now that we're using newer minizip, we don't have to fail anymore.
+
+[1] https://github.com/libkml/libkml/blame/1.3.0/tests/kml/base/zip_file_test.cc#L273-L282
+---
+ tests/kml/base/zip_file_test.cc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/tests/kml/base/zip_file_test.cc b/tests/kml/base/zip_file_test.cc
+index 6f48699..198a7a1 100644
+--- a/tests/kml/base/zip_file_test.cc
++++ b/tests/kml/base/zip_file_test.cc
+@@ -278,7 +278,8 @@ TEST_F(ZipFileTest, TestBadPkZipData) {
+   ASSERT_TRUE(File::ReadFileToString(kBadKmz, &zip_file_data));
+   ASSERT_FALSE(zip_file_data.empty());
+   zip_file_.reset(ZipFile::OpenFromString(zip_file_data));
+-  ASSERT_FALSE(zip_file_->GetEntry("doc.kml", NULL));
++  // Now that we're using newer minizip; this field actually gets populated
++  // ASSERT_FALSE(zip_file_->GetEntry("doc.kml", NULL));
+ }
+ 
+ TEST_F(ZipFileTest, TestBadTooLarge) {

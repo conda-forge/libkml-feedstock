@@ -1,7 +1,7 @@
 From c9c0d80843058d37e317049c82981437dbed866b Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Wed, 4 Oct 2023 17:47:39 +1100
-Subject: [PATCH 5/7] patch things up for use with newer minizip
+Subject: [PATCH 5/8] patch things up for use with newer minizip
 
 ---
  src/kml/base/CMakeLists.txt |  4 +---
