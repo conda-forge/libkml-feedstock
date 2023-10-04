@@ -16,6 +16,8 @@ build:
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
+  ignore_run_exports:
+    - gtest  # [build_platform == target_platform]
 
 requirements:
   build:
@@ -30,6 +32,8 @@ requirements:
     # not compatible with minizip in conda-forge, see GH-2
     # - minizip 1.*
     - zlib
+    # only for testing
+    - gtest  # [build_platform == target_platform]
   run:
     # relied upon by libkml headers, so we need them
     - libboost-headers
