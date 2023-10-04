@@ -1,14 +1,19 @@
+@echo on
+
 mkdir build
 cd build
 
 cmake -G "NMake Makefiles" ^
-      -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-      -D CMAKE_BUILD_TYPE=Release ^
-      %SRC_DIR%
-if errorlevel 1 exit 1
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DCMAKE_BUILD_TYPE=Release ^
+    ..
+if %ERRORLEVEL% neq 0 exit 1
 
-ctest
-if errorlevel 1 exit 1
+cmake --build .
+if %ERRORLEVEL% neq 0 exit 1
+
+ctest --progress --output-on-failure
+if %ERRORLEVEL% neq 0 exit 1
 
 nmake install
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
