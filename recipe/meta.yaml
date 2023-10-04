@@ -28,7 +28,7 @@ requirements:
     - cmake
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - make  # [unix]
+    - ninja
   host:
     - libboost-headers
     - expat
