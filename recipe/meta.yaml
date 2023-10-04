@@ -16,6 +16,9 @@ source:
     - patches/0003-skip-some-few-tests-in-DateTime-Kmz-Test.patch  # [win]
     # force use of our minizip, even if built statically
     - patches/0004-ensure-we-pick-up-minizip-correctly.patch
+    # switch over from vendored API to newer minizip, for longer explanation see:
+    # https://github.com/conda-forge/libkml-feedstock/issues/2#issuecomment-1746247426
+    - patches/0005-patch-things-up-for-use-with-newer-minizip.patch
 
 build:
   number: 1019

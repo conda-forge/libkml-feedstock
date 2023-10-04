@@ -1,7 +1,7 @@
 From 808662da0c17e6648081b46ed16b9efa44ff7fff Mon Sep 17 00:00:00 2001
 From: Alexander Bobkov <alexander.e.bobkov@gmail.com>
 Date: Mon, 13 Jun 2016 17:58:57 +0300
-Subject: [PATCH 1/4] Visual Studio 2015 build fix
+Subject: [PATCH 1/5] Visual Studio 2015 build fix
 
 ---
  src/kml/base/file_win32.cc | 3 ++-
