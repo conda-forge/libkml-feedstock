@@ -8,8 +8,10 @@ source:
   url: https://github.com/libkml/libkml/archive/{{ version }}.tar.gz
   sha256: 8892439e5570091965aaffe30b08631fdf7ca7f81f6495b4648f0950d7ea7963
   patches:
-    # Patches for vc14. If this works we should wrapit in a ifdef and send the patch upstream.
-    - patches/0001-patch-usage-of-empty-char-for-vc14.patch
+    # backport https://github.com/libkml/libkml/commit/c9dda89c35961922d8060b05bc5f6d8e6964fe21
+    - patches/0001-Visual-Studio-2015-build-fix.patch
+    # backport (parts of) https://github.com/libkml/libkml/commit/9163d288dfae64139563190dbf09f82ec28e8559
+    - patches/0002-compile-and-test-libkml-on-MinGW-from-the-MSYS2-proj.patch
 
 build:
   number: 1017
