@@ -15,6 +15,6 @@ cmake ${CMAKE_ARGS} \
 cmake --build .
 
 if [[ "${build_platform}" == "${target_platform}" ]]; then
-    ctest --progress --output-on-failure
+    DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib ctest --progress --output-on-failure
 fi
 make install -j $CPU_COUNT
