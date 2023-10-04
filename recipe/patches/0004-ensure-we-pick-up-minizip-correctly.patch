@@ -1,0 +1,35 @@
+From 21ed97433870211d1aa236f78da1682e90880f78 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 4 Oct 2023 15:07:12 +1100
+Subject: [PATCH 4/4] ensure we pick up minizip correctly
+
+---
+ CMakeLists.txt | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9728ead..c8e5f44 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -110,12 +110,17 @@ else()
+   list(APPEND MINIZIP_DEPENDS ZLIB)
+ endif()
+ 
+-find_package(MiniZip)
++if(WIN32)
++  set(MINIZIP_INCLUDE_DIR $ENV{LIBRARY_PREFIX}/include)
++  set(MINIZIP_LIBRARY $ENV{LIBRARY_PREFIX}/lib/minizip_static)
++  set(MINIZIP_FOUND TRUE)
++else()
++  set(MINIZIP_INCLUDE_DIR $ENV{PREFIX}/include)
++  set(MINIZIP_LIBRARY $ENV{PREFIX}/lib/libminizip.a)
++  set(MINIZIP_FOUND TRUE)
++endif()
+ if(MINIZIP_FOUND)
+   include_directories(${MINIZIP_INCLUDE_DIR})
+-else()
+-  include(External_minizip)
+-  list(APPEND KMLBASE_DEPENDS MINIZIP)
+ endif()
+ 
+ find_package(UriParser)

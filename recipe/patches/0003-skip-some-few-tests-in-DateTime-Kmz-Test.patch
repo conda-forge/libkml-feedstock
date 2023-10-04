@@ -1,7 +1,7 @@
 From 8c35301d380da22c4066f47490d0079cc3249535 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Wed, 4 Oct 2023 22:06:34 +1100
-Subject: [PATCH 3/3] skip some few tests in {DateTime,Kmz}Test
+Subject: [PATCH 3/4] skip some few tests in {DateTime,Kmz}Test
 
 ---
  tests/kml/base/date_time_test.cc  | 6 +++---

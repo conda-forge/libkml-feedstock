@@ -1,6 +1,9 @@
 #! /bin/bash
 set -ex
 
+# remove all doubt where minizip comes from by removing vendored bits
+rm -rf ./src/kml/base/contrib/minizip
+
 mkdir build
 cd build
 
