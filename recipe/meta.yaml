@@ -16,7 +16,7 @@ source:
     - patches/0003-skip-some-few-tests-in-DateTime-Kmz-Test.patch  # [win]
 
 build:
-  number: 1018
+  number: 1019
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
@@ -33,8 +33,10 @@ requirements:
     - libboost-headers
     - expat
     - uriparser
-    # not compatible with minizip in conda-forge, see GH-2
-    # - minizip 1.*
+    # not compatible with newer minizip in conda-forge, see GH-2
+    # we need to use the static builds, because we cannot have
+    # two different versions of shared minizip in the same env.
+    - minizip-static 1.*
     - zlib
     # only for testing
     - gtest  # [build_platform == target_platform]
