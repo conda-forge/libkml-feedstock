@@ -9,7 +9,7 @@ source:
   sha256: 8892439e5570091965aaffe30b08631fdf7ca7f81f6495b4648f0950d7ea7963
   patches:
     # Patches for vc14. If this works we should wrapit in a ifdef and send the patch upstream.
-    - empty_char.patch  # [win and vc==14]
+    - patches/0001-patch-usage-of-empty-char-for-vc14.patch
 
 build:
   number: 1017
