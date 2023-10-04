@@ -19,6 +19,7 @@ source:
     # switch over from vendored API to newer minizip, for longer explanation see:
     # https://github.com/conda-forge/libkml-feedstock/issues/2#issuecomment-1746247426
     - patches/0005-patch-things-up-for-use-with-newer-minizip.patch
+    - patches/0006-remove-libkml_-prefix-now-that-we-re-not-vendoring-m.patch
 
 build:
   number: 1019

@@ -1,0 +1,64 @@
+From d58991455f6bd1be981f3aa3d66f20e5c74f173c Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 4 Oct 2023 18:26:26 +1100
+Subject: [PATCH 6/6] remove `libkml_` prefix now that we're not vendoring
+ minizip anymore
+
+These functions all still exist in the mininzip API, see
+https://github.com/zlib-ng/minizip-ng/blob/1.2/unzip.h
+---
+ src/kml/base/zip_file.cc | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/src/kml/base/zip_file.cc b/src/kml/base/zip_file.cc
+index 0c122fc..63ce648 100644
+--- a/src/kml/base/zip_file.cc
++++ b/src/kml/base/zip_file.cc
+@@ -120,12 +120,12 @@ ZipFile::ZipFile(const string& data)
+       unz_file_info finfo;
+       do {
+         static char buf[1024];
+-        if (libkml_unzGetCurrentFileInfo(zfile, &finfo, buf, sizeof(buf),
++        if (unzGetCurrentFileInfo(zfile, &finfo, buf, sizeof(buf),
+               0, 0, 0, 0) == UNZ_OK) {
+           zipfile_toc_.push_back(buf);
+         }
+-      } while (libkml_unzGoToNextFile(zfile) == UNZ_OK);
+-      libkml_unzClose(zfile);
++      } while (unzGoToNextFile(zfile) == UNZ_OK);
++      unzClose(zfile);
+     }
+   }
+ }
+@@ -183,7 +183,7 @@ bool ZipFile::IsInToc(const string& path_in_zip) const {
+ class UnzFileHelper {
+  public:
+   UnzFileHelper(unzFile unzfile) : unzfile_(unzfile) {}
+-  ~UnzFileHelper() { libkml_unzClose(unzfile_); }
++  ~UnzFileHelper() { unzClose(unzfile_); }
+   unzFile get_unzfile() { return unzfile_; }
+  private:
+   unzFile unzfile_;
+@@ -208,10 +208,10 @@ bool ZipFile::GetEntry(const string& path_in_zip,
+ 
+   boost::scoped_ptr<UnzFileHelper> unzfilehelper(new UnzFileHelper(unzfile));
+   unz_file_info finfo;
+-  if (libkml_unzLocateFile(unzfilehelper->get_unzfile(),
++  if (unzLocateFile(unzfilehelper->get_unzfile(),
+                     path_in_zip.c_str(), 0) != UNZ_OK ||
+-      libkml_unzOpenCurrentFile(unzfilehelper->get_unzfile()) != UNZ_OK ||
+-      libkml_unzGetCurrentFileInfo(unzfilehelper->get_unzfile(), &finfo, 0, 0,
++      unzOpenCurrentFile(unzfilehelper->get_unzfile()) != UNZ_OK ||
++      unzGetCurrentFileInfo(unzfilehelper->get_unzfile(), &finfo, 0, 0,
+                                    0, 0, 0, 0) != UNZ_OK) {
+     return false;
+   }
+@@ -227,7 +227,7 @@ bool ZipFile::GetEntry(const string& path_in_zip,
+     return true;
+   }
+   char* filedata = new char[nbytes];
+-  if (libkml_unzReadCurrentFile(unzfilehelper->get_unzfile(), filedata,
++  if (unzReadCurrentFile(unzfilehelper->get_unzfile(), filedata,
+                          nbytes) == static_cast<int>(nbytes)) {
+     output->assign(filedata, nbytes);
+     delete [] filedata;
