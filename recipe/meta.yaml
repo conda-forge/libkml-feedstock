@@ -16,7 +16,7 @@ source:
     - patches/0003-skip-some-few-tests-in-DateTime-Kmz-Test.patch  # [win]
 
 build:
-  number: 1017
+  number: 1018
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
