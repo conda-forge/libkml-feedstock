@@ -55,9 +55,18 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/lib/libkmlbase.so.1  # [linux]
-    - test -f $PREFIX/lib/libkmlbase.dylib  # [osx]
-    - if not exist %LIBRARY_LIB%\\kmlbase.lib exit 1  # [win]
+    {% set libs = ["base", "convenience", "dom", "engine", "regionator", "xsd"] %}
+    {% for each_lib in libs %}
+    # presence of shared libs (only unix)
+    - test -f $PREFIX/lib/libkml{{ each_lib }}.so               # [linux]
+    - test -f $PREFIX/lib/libkml{{ each_lib }}.dylib            # [osx]
+
+    # absence of static libraries (unix)
+    - test ! -f $PREFIX/lib/libkml{{ each_lib }}.a              # [unix]
+
+    # presence of static libs on windows
+    - if not exist %LIBRARY_LIB%\kml{{ each_lib }}.lib exit 1   # [win]
+    {% endfor %}
 
 about:
   home: https://github.com/libkml/libkml
