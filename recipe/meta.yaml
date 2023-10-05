@@ -68,6 +68,13 @@ test:
     - if not exist %LIBRARY_LIB%\kml{{ each_lib }}.lib exit 1   # [win]
     {% endfor %}
 
+    # ensure we're not shipping minizip, see GH-2;
+    # we cannot do the same to test for absence of uriparser, because
+    # it's a runtime dependence and thus present in the environment
+    - test ! -f $PREFIX/lib/libminizip.so           # [linux]
+    - test ! -f $PREFIX/lib/libminizip.dylib        # [osx]
+    - if exist %LIBRARY_LIB%\minizip.lib exit 1     # [win]
+
 about:
   home: https://github.com/libkml/libkml
   license: BSD-3-Clause
