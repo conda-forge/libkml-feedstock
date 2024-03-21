@@ -14,9 +14,18 @@ source:
     - patches/0002-compile-and-test-libkml-on-MinGW-from-the-MSYS2-proj.patch
     # skip a very few failing tests on windows
     - patches/0003-skip-some-few-tests-in-DateTime-Kmz-Test.patch  # [win]
+    # force use of our minizip, even if built statically
+    - patches/0004-ensure-we-pick-up-minizip-correctly.patch
+    # switch over from vendored API to newer minizip, for longer explanation see:
+    # https://github.com/conda-forge/libkml-feedstock/issues/2#issuecomment-1746247426
+    - patches/0005-patch-things-up-for-use-with-newer-minizip.patch
+    - patches/0006-remove-libkml_-prefix-now-that-we-re-not-vendoring-m.patch
+    - patches/0007-copy-over-a-define-necessary-for-libmkl-s-zip-handli.patch
+    # we don't have to fail on files produced by less ancient zip versions anymore
+    - patches/0008-remove-expected-failure-for-handling-newer-zips.patch
 
 build:
-  number: 1018
+  number: 1019
   run_exports:
     # no ABI lab result.  Pinning to major-minor as conda-forge has.
     - {{ pin_subpackage('libkml', max_pin='x.x') }}
@@ -28,13 +37,15 @@ requirements:
     - cmake
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - make  # [unix]
+    - ninja
   host:
     - libboost-headers
     - expat
     - uriparser
-    # not compatible with minizip in conda-forge, see GH-2
-    # - minizip 1.*
+    # not compatible with newer minizip in conda-forge, see GH-2
+    # we need to use the static builds, because we cannot have
+    # two different versions of shared minizip in the same env.
+    - minizip-static 1.*
     - zlib
     # only for testing
     - gtest  # [build_platform == target_platform]
@@ -44,9 +55,25 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/lib/libkmlbase.so.1  # [linux]
-    - test -f $PREFIX/lib/libkmlbase.dylib  # [osx]
-    - if not exist %LIBRARY_LIB%\\kmlbase.lib exit 1  # [win]
+    {% set libs = ["base", "convenience", "dom", "engine", "regionator", "xsd"] %}
+    {% for each_lib in libs %}
+    # presence of shared libs (only unix)
+    - test -f $PREFIX/lib/libkml{{ each_lib }}.so               # [linux]
+    - test -f $PREFIX/lib/libkml{{ each_lib }}.dylib            # [osx]
+
+    # absence of static libraries (unix)
+    - test ! -f $PREFIX/lib/libkml{{ each_lib }}.a              # [unix]
+
+    # presence of static libs on windows
+    - if not exist %LIBRARY_LIB%\kml{{ each_lib }}.lib exit 1   # [win]
+    {% endfor %}
+
+    # ensure we're not shipping minizip, see GH-2;
+    # we cannot do the same to test for absence of uriparser, because
+    # it's a runtime dependence and thus present in the environment
+    - test ! -f $PREFIX/lib/libminizip.so           # [linux]
+    - test ! -f $PREFIX/lib/libminizip.dylib        # [osx]
+    - if exist %LIBRARY_LIB%\minizip.lib exit 1     # [win]
 
 about:
   home: https://github.com/libkml/libkml
