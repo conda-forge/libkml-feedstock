@@ -40,14 +40,6 @@ requirements:
     # relied upon by libkml headers, so we need them
     - libboost-headers
 
-test:
-  commands:
-    - test -f $PREFIX/include/kml/engine.h  # [unix]
-    - test -f $PREFIX/lib/libkmlbase.so.1  # [linux]
-    - test -f $PREFIX/lib/libkmlbase.dylib  # [osx]
-    - if not exist %LIBRARY_LIB%\\kmlbase.lib exit 1  # [win]
-    - if not exist %LIBRARY_INC%\\kml\\engine.h exit 1  # [win]
-
 outputs:
   - name: libkml
     files:
@@ -66,6 +58,14 @@ outputs:
         - expat
         - uriparser
         - zlib
+
+    test:
+      commands:
+        - test ! -f $PREFIX/include/kml/engine.h  # [unix]
+        - test -f $PREFIX/lib/libkmlbase.so.1  # [linux]
+        - test -f $PREFIX/lib/libkmlbase.dylib  # [osx]
+        - if not exist %LIBRARY_LIB%\\kmlbase.lib exit 1  # [win]
+        - if exist %LIBRARY_INC%\\kml\\engine.h exit 1  # [win]
 
   - name: libkml-devel
     build:
@@ -94,6 +94,11 @@ outputs:
         - {{ pin_subpackage('libkml', exact=True) }}
         # relied upon by libkml headers, so we need them
         - libboost-headers
+
+    test:
+      commands:
+        - test -f $PREFIX/include/kml/engine.h  # [unix]
+        - if not exist %LIBRARY_INC%\\kml\\engine.h exit 1  # [win]
 
 about:
   home: https://github.com/libkml/libkml
