@@ -10,8 +10,9 @@ fi
 
 if [[ "${target_platform}" == "linux-"* ]]; then
     export LDFLAGS="$LDFLAGS -Wl,--exclude-libs,ALL"
-else
+elif [[ "${target_platform}" == "osx-"* ]]; then
     export LDFLAGS="$LDFLAGS -Wl,-unexported_symbol,_zip*"
+    export CXXFLAGS="$CXXFLAGS -D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION"
 fi
 
 cmake ${CMAKE_ARGS} \
