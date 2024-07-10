@@ -42,9 +42,11 @@ requirements:
 
 test:
   commands:
+    - test -f $PREFIX/include/kml/engine.h  # [unix]
     - test -f $PREFIX/lib/libkmlbase.so.1  # [linux]
     - test -f $PREFIX/lib/libkmlbase.dylib  # [osx]
     - if not exist %LIBRARY_LIB%\\kmlbase.lib exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\kml\\engine.h exit 1  # [win]
 
 outputs:
   - name: libkml
@@ -73,10 +75,10 @@ outputs:
     files:
       - lib/cmake/libkml
       - lib/pkgconfig/libkml.pc
-      - include/libkml
+      - include/kml
       - Library/cmake/LibKML*
       - Library/lib/pkgconfig/libkml.pc
-      - Library/include/libkml
+      - Library/include/kml
     requirements:
       build:
         - cmake
