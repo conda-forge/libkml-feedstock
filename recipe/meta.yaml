@@ -63,6 +63,7 @@ outputs:
       host:
         - expat
         - uriparser
+        - zlib
 
   - name: libkml-devel
     build:
