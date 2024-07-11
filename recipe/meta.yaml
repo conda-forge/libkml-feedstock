@@ -18,7 +18,7 @@ source:
     - patches/external_minizip.diff     # [unix]
 
 build:
-  number: 1019
+  number: 1020
 
 requirements:
   build:
