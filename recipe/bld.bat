@@ -9,6 +9,7 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DBUILD_TESTING=ON ^
     -DCMAKE_BUILD_TYPE=Release ^
+    -DCMAKE_CXX_STANDARD=17 ^
     ..
 if %ERRORLEVEL% neq 0 exit 1
 
